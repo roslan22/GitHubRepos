@@ -10,3 +10,10 @@ li{
   line-height: 2rem;
   border-bottom: 1px dotted #777;
 }
+
+input{
+  font-size:0.8rem;
+  height: 20px;
+  width: 150px;
+  margin: 10px
+}
