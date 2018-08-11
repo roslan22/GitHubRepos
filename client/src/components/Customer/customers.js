@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import {connect } from 'react-redux';
-import {getCustomers} from '../../store/actions/customer'
+import {getRepositories} from '../../store/actions/customer'
 import './customers.css';
 
 class Customers extends Component {
 
   static propTypes = {
-    getCustomers: PropTypes.func.isRequired,
-    customers: PropTypes.array.isRequired
+    getRepositories: PropTypes.func.isRequired,
+    customers: PropTypes.array.isRequired,
+    repositories: PropTypes.array.isRequired
   }
 
   static defaultProps = {
@@ -16,30 +17,31 @@ class Customers extends Component {
   }
 
   componentWillMount() {
-    this.props.getCustomers();
+    this.props.getRepositories();
   }
 
   render() {
 
     return (
       <div>
-        <h2>Customers</h2>
+        <h2>Repositories</h2>
         <ul>
-        {this.props.customers.map(customer =>
-          <li key={customer.id}>{customer.firstName} {customer.lastName}</li>
+        {this.props.customers.map(repo =>
+          <li key={repo.id}>{repo.forks} {repo.full_name} {repo.html_url}</li>
         )}
         </ul>
-      </div>
+      </div>      
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  customers: state.customers
+  customers: state.customers,
+  repositories: state.repositories
 })
 
 const dispatchToProps = (dispatch) => ({
-   getCustomers: () => dispatch(getCustomers())
+   getRepositories: () => dispatch(getRepositories('CompanyRide'))
 })
 
 export default connect(mapStateToProps, dispatchToProps)(Customers);

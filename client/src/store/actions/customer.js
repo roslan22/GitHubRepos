@@ -1,7 +1,7 @@
-import {GET_CUSTOMERS} from './constants';
+import {GET_REPOSITORIES} from './constants';
 
-export const getCustomers = () => dispatch => {
-  return fetch('/api/customers')
+export const getRepositories = (searchItem) => dispatch => {
+  return fetch(`/api/search/${searchItem}`)
     .then(res => res.json())
-    .then(customers => dispatch({type: GET_CUSTOMERS, payload: customers}))
+    .then(repos => dispatch({type: GET_REPOSITORIES, payload: repos}))
 }
