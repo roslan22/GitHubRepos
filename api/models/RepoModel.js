@@ -1,6 +1,8 @@
 'use strict';
 
-module.exports.RepoModel = {
+module.exports = {
+    id : 0,
+    forks : 0,
     full_name : '',
-    html_url : ''
+    html_url : '',
 };
