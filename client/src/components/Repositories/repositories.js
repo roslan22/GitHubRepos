@@ -1,10 +1,16 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { getRepositories } from '../../store/actions/repositories';
 import './repositories.css';
 
-class Repositores extends Component {
+class Repositores extends PureComponent {
+  constructor(){
+    super();
+    this.state = { searchValue: "" };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
   static propTypes = {
     getRepositories: PropTypes.func.isRequired,
@@ -13,23 +19,26 @@ class Repositores extends Component {
 
   static defaultProps = {
     listOfRepos: [],
-    searchValue: 'Please enter git repo'
   }
 
   componentWillMount() {
-    this.props.getRepositories();
+    //TODO: get all bookmarks
   }
 
-  handleSubmit(event) {
-    alert('An essay was submitted: ' + this.state.value);
+  handleSubmit(event){
+    this.props.getRepositories(this.state.searchValue);
     event.preventDefault();
+  }
+
+  handleChange(event){
+    this.setState({searchValue: event.target.value});
   }
 
   render() {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-        <input type="text" name="title" placeholder="Enter Git repo name" value={this.props.searchValue}/>
+        <input type="text" name="title" placeholder="Enter Git repo name" value={this.state.searchValue} onChange={this.handleChange}/>
         <input type="submit" value="Submit" />
         </form>
         <h2>Repositories</h2>
@@ -48,7 +57,7 @@ const mapStateToProps = (state) => ({
 })
 
 const dispatchToProps = (dispatch) => ({
-  getRepositories: () => dispatch(getRepositories('CompanyRide'))
+  getRepositories: () => dispatch(getRepositories(this.state.searchValue))
 })
 
 export default connect(mapStateToProps, dispatchToProps)(Repositores);
