@@ -1,9 +1,12 @@
 const express = require('express');
-
+const bodyParser = require('body-parser');
 const app = express();
 
 var routes = require('./api/routes/gitHubRoutes'); //importing route
 routes(app); //register the route
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 const port = 5000;
 

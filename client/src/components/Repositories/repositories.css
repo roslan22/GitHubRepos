@@ -1,14 +1,37 @@
-ul {
-  padding:0;
-  list-style:none;
-  width: 30%;
-  margin:auto;
+.repo-container{
+  display: flex;
 }
 
-li{
-  font-size:1.2rem;
-  line-height: 2rem;
-  border-bottom: 1px dotted #777;
+.repo-container div{
+  border: 1px #ccc solid;
+}
+.repo-line-forks
+{
+  flex:1;
+  order:1;
+}
+
+.repo-line-fullname
+{
+  flex:3;
+  order:2;
+}
+
+.repo-line-url
+{
+  flex:1;
+  order:4;
+}
+
+.repo-line-bookmark
+{
+  flex: 2;
+  order: 3;
+}
+
+.repo-list{
+  width : 60%;
+  display: inline-block;
 }
 
 input{
@@ -17,4 +40,3 @@ input{
   width: 150px;
   margin: 10px
 }
-

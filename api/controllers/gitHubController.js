@@ -30,11 +30,12 @@ exports.bookmarkRepository = (req, res) => {
 
     try{
         repositoriesService.bookmarkRepository(repoId)
-        res.sendStatus(201);
+        res.bookmarkedRepoId = repoId;
+        res.status(201).send({ bookmarkedRepoId : repoId});
     }
     catch(err){   
         console.log(`error in saving bookmark for id ${repoId}`);
-        res.sendStatus(404);
+        res.status(404).send({bookmarkedRepoId : repoId});
     }
 };
 
