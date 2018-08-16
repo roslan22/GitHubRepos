@@ -8,10 +8,6 @@ export const getRepositories = (searchItem) => dispatch => {
 }
 
 export const addBookmark = (repoId) => dispatch => {
-  // return fetch(`/api/bookmarks/${repoId}`,  {method: 'POST'})
-  //   .then(res => dispatch({type: ADD_BOOKMARK, payload : 
-  //     { status: res.status, 
-  //       bookmarkedRepoId :res.body.bookmarkedRepoId}}))
   return axios({
     method:'post',
     url:`/api/bookmarks/${repoId}`,
