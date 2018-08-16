@@ -34,6 +34,7 @@ class RepoLine extends PureComponent {
         let isRepoBookmarked = this.props.bookmarks.includes(this.state.repo.id.toString());
 
         return (<div className="repo-container" key={this.state.repo.id}>
+            <div className="repo-line-empty-left"></div>
             <div className="repo-line-forks">
                 {this.state.repo.forks}
             </div>
@@ -47,6 +48,7 @@ class RepoLine extends PureComponent {
             <div className="repo-line-url">
                 <a href={this.state.repo.html_url} className="general-button">Go to Repo</a>
             </div>
+            <div className="repo-line-empty-right"></div>
         </div>);
     }
 }

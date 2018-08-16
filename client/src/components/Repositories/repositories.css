@@ -3,35 +3,50 @@
 }
 
 .repo-container div{
-  border: 1px #ccc solid;
+  border: 0px #ccc solid;
 }
+
+.repo-line-empty-left
+{
+  flex:2;
+  order:1;
+}
+
 .repo-line-forks
 {
   flex:1;
-  order:1;
+  order:2;
 }
 
 .repo-line-fullname
 {
   flex:3;
-  order:2;
-}
-
-.repo-line-url
-{
-  flex:1;
-  order:4;
+  order:3;
 }
 
 .repo-line-bookmark
 {
   flex: 2;
-  order: 3;
+  order: 4;
 }
 
-.repo-list{
-  width : 60%;
-  display: inline-block;
+.repo-line-url
+{
+  flex:1;
+  order:5;
+}
+
+.repo-line-empty-right
+{
+  flex:2;
+  order:6;
+}
+
+
+.repo-list
+{
+  align-items: center;
+  justify-content: center;
 }
 
 input{

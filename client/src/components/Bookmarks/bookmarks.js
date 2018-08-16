@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import '../Repositories/repositories.css';
 import RepoLine from '../Repositories/repoLine'
+import RepoTableHeaders from '../Repositories/repoTableHeaders'
 
 class Bookmarks extends PureComponent {
   static propTypes = {
@@ -16,14 +17,8 @@ class Bookmarks extends PureComponent {
   render() {
     return (
       <div>
-        <h2>Bookmarks</h2>
         <div className="repo-list" style={{ display: this.props.listOfRepos.length === 0 ? 'none' : 'block' }}>
-          <div className="repo-container">
-            <div className="repo-line-forks">#Forks</div>
-            <div className="repo-line-fullname">Name</div>
-            <div className="repo-line-bookmark"></div>
-            <div className="repo-line-url"></div>
-          </div>
+          <RepoTableHeaders/>
           {this.props.listOfRepos.map(repo =>
             <RepoLine repo={repo} key={repo.id} />
           )}
