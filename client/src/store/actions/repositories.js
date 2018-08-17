@@ -2,9 +2,16 @@ import { ACTION_NAME, URLS } from '../constants';
 import axios from 'axios';
 
 export const getRepositories = (searchItem) => dispatch => {
-  return fetch(URLS.apiSearch + searchItem)
-    .then(res => res.json())
-    .then(repos => dispatch({ type: ACTION_NAME.getRepositories, payload: repos }))
+  return axios({
+    method: 'get',
+    url: URLS.apiSearch + searchItem,
+  })
+    .then((response) => {
+      dispatch({ type: ACTION_NAME.getRepositories, payload: response.data })
+    })
+    .catch((err) => {
+      console.log('error in getting repos' + err)
+    })
 }
 
 export const addBookmark = (repoId) => dispatch => {

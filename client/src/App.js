@@ -12,11 +12,11 @@ class App extends Component {
     return (
       <Provider store={ store }>
         <Router>
-        <div className="App">
-          <header className="App-header">
-            <h1 className="App-title">GitHub API</h1>
-            <Link to="/" className="App-link">Repo Search</Link>
-            <Link to="/bookmarks" className="App-link">Bookmarks</Link>
+        <div className="app">
+          <header className="app-header">
+            <h1 className="app-title">GitHub API</h1>
+            <Link to="/" className="app-link">Repo Search</Link>
+            <Link to="/bookmarks" className="app-link">Bookmarks</Link>
           </header>
           <Route exact path="/" component={Repositories} />
           <Route path="/bookmarks" component={Bookmarks} />
