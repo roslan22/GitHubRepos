@@ -3,7 +3,7 @@ let currentRepositories = new Map();
 let bookmarkedReposById = new Map();
 
  const updateCurrentRepositories = (repos) => {
-    console.log("updating current repos: " + repos)
+    console.log("updating current repos")
     repos.forEach(repo => {
         currentRepositories.set(repo.id, repo);
     });
