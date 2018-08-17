@@ -23,6 +23,22 @@ export const addBookmark = (repoId) => dispatch => {
     });
 }
 
+export const deleteBookmark = (repoId) => dispatch => {
+  return axios({
+    method: 'delete',
+    url: URLS.bookmarks + repoId,
+  })
+    .then(function (response) {
+      dispatch({
+        type: ACTION_NAME.deleteBookmark, payload:
+        {
+          status: response.status,
+          bookmarkedRepos: response.data
+        }
+      })
+    });
+}
+
 export const getBookmarkedRepos = () => dispatch => {
   return axios({
     method: 'get',

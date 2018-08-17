@@ -6,7 +6,8 @@ module.exports = function (app) {
         .get(gitHub.getListOfReposAsync);
 
     app.route('/api/bookmarks/:repoId')
-        .post(gitHub.bookmarkRepository);        
+        .post(gitHub.bookmarkRepository)
+        .delete(gitHub.deleteRepository);        
 
     app.route('/api/bookmarks')
         .get(gitHub.getBookmarkedRepositories);

@@ -39,6 +39,19 @@ const bookmarkRepository = (req, res) => {
     }
 };
 
+const deleteRepository = (req, res) => {
+    const repoId = req.params.repoId;
+    try {
+        repositoriesService.deleteRepository(repoId)
+        const bookmarkedRepos = repositoriesService.getBookmarkedRepositories()
+        res.json(bookmarkedRepos);
+    }
+    catch (err) {
+        console.log(`error in saving bookmark for id ${repoId}`);
+        res.status(404).send({ bookmarkedRepoId: repoId });
+    }
+}
+
 const getBookmarkedRepositories = (req, res) => {
     const bookmarkedRepos = repositoriesService.getBookmarkedRepositories();
     res.json(bookmarkedRepos);
@@ -47,5 +60,6 @@ const getBookmarkedRepositories = (req, res) => {
 module.exports = {
     getListOfReposAsync,
     bookmarkRepository,
-    getBookmarkedRepositories
+    getBookmarkedRepositories,
+    deleteRepository
 }

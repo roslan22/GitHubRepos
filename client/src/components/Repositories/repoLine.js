@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
-import { addBookmark } from '../../store/actions/repositories';
+import { addBookmark, deleteBookmark } from '../../store/actions/repositories';
 import './repositories.css';
 import '../../styles/button.css'
 import { DATA_TYPE } from '../../store/constants'
@@ -15,10 +15,12 @@ class RepoLine extends PureComponent {
             type: props.type
         };
         this.handleAddBookmark = this.handleAddBookmark.bind(this);
+        this.handleDeleteBookmark = this.handleDeleteBookmark.bind(this);
     }
 
     static propTypes = {
         addBookmark: PropTypes.func.isRequired,
+        deleteBookmark: PropTypes.func.isRequired,
         repo: PropTypes.object,
         bookmarks: PropTypes.array.isRequired
     }
@@ -30,7 +32,10 @@ class RepoLine extends PureComponent {
 
     handleAddBookmark(event) {
         this.props.addBookmark(event.target.value);
-        event.preventDefault();
+    }
+
+    handleDeleteBookmark(event) {
+        this.props.deleteBookmark(event.target.value);
     }
 
     renderAddBookmarkButton(isRepoBookmarked) {
@@ -49,7 +54,7 @@ class RepoLine extends PureComponent {
 
     renderDeleteBookmark()
     {
-        return <button onClick={this.handleAddBookmark} value={this.state.repo.id} className="general-button">Delete</button>
+        return <button onClick={this.handleDeleteBookmark} value={this.state.repo.id} className="general-button">Delete</button>
     }
 
     render() {
@@ -74,7 +79,8 @@ class RepoLine extends PureComponent {
 }
 
 const dispatchToProps = (dispatch) => ({
-    addBookmark: (repoId) => dispatch(addBookmark(repoId))
+    addBookmark: (repoId) => dispatch(addBookmark(repoId)),
+    deleteBookmark: (repoId) => dispatch(deleteBookmark(repoId))
 })
 
 const mapStateToProps = (state) => ({

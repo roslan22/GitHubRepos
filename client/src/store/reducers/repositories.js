@@ -27,6 +27,18 @@ const repositoriesReducer = (state = initState, { type, payload }) => {
                 bookmarks: [...state.bookmarks, payload.bookmarkedRepoId]
             }
             return state;
+        case ACTION_NAME.deleteBookmark:
+            if (payload.status !== SUCCESS_STATUSES.success) {
+                console.log("error, the bookmark wasn't deleted");
+                return state;
+            }
+
+            state = {
+                ...state,
+                bookmarkedRepos: payload.bookmarkedRepos,
+                bookmarks : payload.bookmarkedRepos.map(repo=>repo.id)
+            }
+            return state;            
         case ACTION_NAME.getBookmarkedRepos:
             if (payload.status !== SUCCESS_STATUSES.success) {
                 console.log("the bookmarks wasn't found");
@@ -35,7 +47,7 @@ const repositoriesReducer = (state = initState, { type, payload }) => {
 
             state = {
                 ...state,
-                bookmarkedRepos: payload.bookmarkedRepos
+                bookmarkedRepos: payload.bookmarkedRepos,
             }
             return state;
         default:

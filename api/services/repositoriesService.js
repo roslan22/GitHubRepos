@@ -21,6 +21,18 @@ let bookmarkedReposById = new Map();
     bookmarkedReposById.set(repo.id, repo);
  }
 
+ const deleteRepository = (repoId) => {
+    console.log("deleting repo: " + repoId);
+    let repo = bookmarkedReposById.get(parseInt(repoId));
+    if(!repo)
+    {
+        // no key was found
+       throw new Error(`Repository with ${repoId} was not found`);
+    }
+
+    bookmarkedReposById.delete(parseInt(repoId));
+ }
+
  const getBookmarkedRepositories = () => {
     console.log("getting all bookmarked repos");
     return [...bookmarkedReposById.values()];
@@ -30,5 +42,6 @@ let bookmarkedReposById = new Map();
  module.exports = {
     bookmarkRepository,
     updateCurrentRepositories,
-    getBookmarkedRepositories
+    getBookmarkedRepositories,
+    deleteRepository
 }
