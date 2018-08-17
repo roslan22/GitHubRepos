@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function (app) {
-    var gitHub = require('../controllers/gitHubController');
+    const gitHub = require('../controllers/gitHubController');
 
     app.route('/api/search/:searchItem')
         .get(gitHub.getListOfReposAsync);
@@ -10,5 +10,4 @@ module.exports = function (app) {
 
     app.route('/api/bookmarks')
         .get(gitHub.getBookmarkedRepositories);
-
 };

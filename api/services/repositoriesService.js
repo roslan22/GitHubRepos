@@ -1,6 +1,4 @@
 'use strict';
-const {RepoModel} = require('../models/RepoModel');
-
 let currentRepositories = new Map();
 let bookmarkedReposById = new Map();
 
@@ -30,7 +28,7 @@ let bookmarkedReposById = new Map();
  
 
  module.exports = {
-    bookmarkRepository: bookmarkRepository,
-    updateCurrentRepositories : updateCurrentRepositories,
-    getBookmarkedRepositories : getBookmarkedRepositories
+    bookmarkRepository,
+    updateCurrentRepositories,
+    getBookmarkedRepositories
 }

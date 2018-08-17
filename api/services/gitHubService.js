@@ -8,5 +8,5 @@ const get_repositories = function (searchItem) {
 }
 
 module.exports = {
-    get_repos: get_repositories
+   get_repositories
 }

@@ -4,6 +4,7 @@
 
 .repo-container div{
   border: 0px #ccc solid;
+  padding: 5px;
 }
 
 .repo-line-empty-left
@@ -41,7 +42,6 @@
   flex:2;
   order:6;
 }
-
 
 .repo-list
 {

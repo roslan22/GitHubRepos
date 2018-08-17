@@ -1,17 +1,17 @@
 'use strict';
 const gitHubService = require('../services/gitHubService');
-const repoModel  = require('../models/RepoModel')
+const { repoModel } = require('../models/repoModel')
 const repositoriesService = require('../services/repositoriesService')
 
 const _ = require('lodash');
 
-exports.getListOfReposAsync = async (req, res, next) => {    
+const getListOfReposAsync = async (req, res, next) => {
     let result = {};
 
     try {
-        result = await gitHubService.get_repos(req.params.searchItem);
+        result = await gitHubService.get_repositories(req.params.searchItem);
     }
-    catch(err) {
+    catch (err) {
         next(err);
     }
 
@@ -25,21 +25,27 @@ exports.getListOfReposAsync = async (req, res, next) => {
     res.json(items);
 };
 
-exports.bookmarkRepository = (req, res) => {
+const bookmarkRepository = (req, res) => {
     const repoId = req.params.repoId;
 
-    try{
+    try {
         repositoriesService.bookmarkRepository(repoId)
         res.bookmarkedRepoId = repoId;
-        res.status(201).send({ bookmarkedRepoId : repoId});
+        res.status(201).send({ bookmarkedRepoId: repoId });
     }
-    catch(err){   
+    catch (err) {
         console.log(`error in saving bookmark for id ${repoId}`);
-        res.status(404).send({bookmarkedRepoId : repoId});
+        res.status(404).send({ bookmarkedRepoId: repoId });
     }
 };
 
-exports.getBookmarkedRepositories = (req, res) => {
+const getBookmarkedRepositories = (req, res) => {
     const bookmarkedRepos = repositoriesService.getBookmarkedRepositories();
     res.json(bookmarkedRepos);
 };
+
+module.exports = {
+    getListOfReposAsync,
+    bookmarkRepository,
+    getBookmarkedRepositories
+}

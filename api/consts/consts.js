@@ -5,4 +5,6 @@ const consts = {
     gitHubAPISearchPath : 'https://api.github.com/search/'
 }
 
-module.exports.consts = consts;
+module.exports ={ 
+    consts 
+};
