@@ -3,11 +3,11 @@
 > This project create full stack app with React/Redux and Express. 
 Run your client and server with a single command
 
-##Notes:
+## Notes:
 
 The best way to see all repositories (in scalable maner) is by implementing https://github.com/bvaughn/react-virtualized. 
-However in this version it is not implemented yet. 
-In Repositories page when component is mount I load 'react' repos, you can change it or remove componentWillMount function from RepoSearch component.  
+However, in this version it is not implemented yet. 
+The main (Repositories) page loads 'react' reposositories at the first time, you may remove it by deleting 'componentWillMount function' that is located in RepoSearch component.  
 
 ## Quick Start
 
