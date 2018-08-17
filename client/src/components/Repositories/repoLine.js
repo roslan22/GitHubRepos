@@ -39,7 +39,9 @@ class RepoLine extends PureComponent {
             : <button className="general-button-disabled" disabled>Bookmarked</button>)
     }
 
-    renderAddBookmark(isRepoBookmarked) {
+    renderAddBookmark() {
+        let isRepoBookmarked = this.props.bookmarks.includes(this.state.repo.id.toString());
+
         return (!isRepoBookmarked ?
             <button onClick={this.handleAddBookmark} value={this.state.repo.id} className="general-button">Bookmark</button>
             : <button className="general-button-disabled" disabled>Bookmarked</button>)
@@ -51,8 +53,6 @@ class RepoLine extends PureComponent {
     }
 
     render() {
-        let isRepoBookmarked = this.props.bookmarks.includes(this.state.repo.id.toString());
-
         return (<div className="repo-container" key={this.state.repo.id}>
             <div className="repo-line-empty-left"></div>
             <div className="repo-line-forks">
@@ -62,7 +62,7 @@ class RepoLine extends PureComponent {
                 {this.state.repo.full_name}
             </div>
             <div className="repo-line-bookmark">
-                {this.state.type === DATA_TYPE.repos && this.renderAddBookmark(isRepoBookmarked)}
+                {this.state.type === DATA_TYPE.repos && this.renderAddBookmark()}
                 {this.state.type === DATA_TYPE.bookmarks && this.renderDeleteBookmark()}
             </div>
             <div className="repo-line-url">

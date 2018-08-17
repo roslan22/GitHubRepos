@@ -5,33 +5,46 @@ import '../Repositories/repositories.css';
 import RepoLine from '../Repositories/repoLine'
 import RepoTableHeaders from '../Repositories/repoTableHeaders'
 import { DATA_TYPE } from '../../store/constants'
+import { getBookmarkedRepos } from '../../store/actions/repositories';
 
 class Bookmarks extends PureComponent {
   static propTypes = {
-    listOfRepos: PropTypes.array.isRequired,
+    bookmarkedRepos: PropTypes.array.isRequired,
   }
 
   static defaultProps = {
-    listOfRepos: [],
+    bookmarkedRepos: []
+  }
+
+  static propTypes = {
+    getBookmarkedRepos: PropTypes.func.isRequired,
+  }
+
+  componentWillMount() {
+    this.props.getBookmarkedRepos();
   }
 
   render() {
+    let bookmarkedLength = this.props.bookmarkedRepos.length;
     return (
       <div>
-        <div className="repo-list" style={{ display: this.props.listOfRepos.length === 0 ? 'none' : 'block' }}>
-          <RepoTableHeaders/>
-          {this.props.listOfRepos.map(repo =>
-            <RepoLine repo={repo} key={repo.id} type={ DATA_TYPE.bookmarks }/>
-          )}
-        </div>
+        <RepoTableHeaders />
+        {bookmarkedLength === 0 && <div>No bookmarks found, please add them first</div>}
+        {this.props.bookmarkedRepos.map(
+          repo => <RepoLine repo={repo} key={repo.id} type={DATA_TYPE.bookmarks} />
+        )}
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  listOfRepos: state.repositories.listOfRepos,
+  bookmarkedRepos: state.repositories.bookmarkedRepos,
 })
 
-export default connect(mapStateToProps)(Bookmarks)
+const dispatchToProps = (dispatch) => ({
+  getBookmarkedRepos: () => dispatch(getBookmarkedRepos()),
+})
+
+export default connect(mapStateToProps, dispatchToProps)(Bookmarks)
 

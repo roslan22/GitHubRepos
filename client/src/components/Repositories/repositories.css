@@ -49,6 +49,11 @@
   justify-content: center;
 }
 
+.repo-header
+{
+  background-color: aliceblue
+}
+
 input{
   font-size:0.8rem;
   height: 20px;

@@ -5,12 +5,12 @@ import RepoTable from './repoTable'
 import RepoSearch from './repoSearch';
 
 const Repositores = () => {
-    return (
-      <div>
-          <RepoSearch/>
-          <RepoTable/>
-      </div>
-    );
+  return (
+    <div>
+      <RepoSearch />
+      <RepoTable />
+    </div>
+  )
 }
 
 export default Repositores;

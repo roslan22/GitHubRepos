@@ -6,6 +6,7 @@ export const DATA_TYPE = {
 export const ACTION_NAME = {
     getRepositories: 'get_repositories',
     addBookmark: 'add_bookmark',
+    getBookmarkedRepos:'get_bookmarked_repos'
 };
 
 export const SUCCESS_STATUSES = {
