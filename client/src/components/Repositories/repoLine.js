@@ -14,8 +14,6 @@ class RepoLine extends PureComponent {
             repo: props.repo,
             type: props.type
         };
-        this.handleAddBookmark = this.handleAddBookmark.bind(this);
-        this.handleDeleteBookmark = this.handleDeleteBookmark.bind(this);
     }
 
     static propTypes = {
@@ -30,29 +28,29 @@ class RepoLine extends PureComponent {
         bookmarks: []
     }
 
-    handleAddBookmark(event) {
+    handleAddBookmark = (event) => {
         this.props.addBookmark(event.target.value);
     }
 
-    handleDeleteBookmark(event) {
+    handleDeleteBookmark = (event) => {
         this.props.deleteBookmark(event.target.value);
     }
 
-    renderAddBookmarkButton(isRepoBookmarked) {
+    renderAddBookmarkButton = (isRepoBookmarked) => {
         return (!isRepoBookmarked ?
             <button onClick={this.handleAddBookmark} value={this.state.repo.id} className="general-button">Bookmark</button>
             : <button className="general-button-disabled" disabled>Bookmarked</button>)
     }
 
-    renderAddBookmark() {
+    renderAddBookmark = () => {
         let isRepoBookmarked = this.props.bookmarks.includes(this.state.repo.id.toString());
 
         return (!isRepoBookmarked ?
             <button onClick={this.handleAddBookmark} value={this.state.repo.id} className="general-button">Bookmark</button>
-            : <button className="general-button-disabled" disabled>Bookmarked</button>)
+            : <button disabled>Bookmarked</button>)
     }
 
-    renderDeleteBookmark()
+    renderDeleteBookmark = () =>
     {
         return <button onClick={this.handleDeleteBookmark} value={this.state.repo.id} className="general-button">Delete</button>
     }

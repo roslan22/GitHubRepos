@@ -6,10 +6,10 @@ import RepoSearch from './repoSearch';
 
 const Repositores = () => {
   return (
-    <div>
+    <React.Fragment>
       <RepoSearch />
       <RepoTable />
-    </div>
+    </React.Fragment>
   )
 }
 

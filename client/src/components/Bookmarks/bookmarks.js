@@ -10,14 +10,11 @@ import { getBookmarkedRepos } from '../../store/actions/repositories';
 class Bookmarks extends PureComponent {
   static propTypes = {
     bookmarkedRepos: PropTypes.array.isRequired,
+    getBookmarkedRepos: PropTypes.func.isRequired
   }
 
   static defaultProps = {
     bookmarkedRepos: []
-  }
-
-  static propTypes = {
-    getBookmarkedRepos: PropTypes.func.isRequired,
   }
 
   componentWillMount() {
@@ -26,14 +23,15 @@ class Bookmarks extends PureComponent {
 
   render() {
     let bookmarkedLength = this.props.bookmarkedRepos.length;
+    
     return (
-      <div>
+      <React.Fragment>
         <RepoTableHeaders />
         {bookmarkedLength === 0 && <div>No bookmarks found, please add them first</div>}
         {this.props.bookmarkedRepos.map(
           repo => <RepoLine repo={repo} key={repo.id} type={DATA_TYPE.bookmarks} />
         )}
-      </div>
+      </React.Fragment>
     );
   }
 }

@@ -36,7 +36,7 @@ const repositoriesReducer = (state = initState, { type, payload }) => {
             state = {
                 ...state,
                 bookmarkedRepos: payload.bookmarkedRepos,
-                bookmarks : payload.bookmarkedRepos.map(repo=>repo.id)
+                bookmarks : [...payload.bookmarkedRepos.map(repo => String(repo.id))]
             }
             return state;            
         case ACTION_NAME.getBookmarkedRepos:

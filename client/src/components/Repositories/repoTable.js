@@ -18,13 +18,13 @@ class RepoTable extends PureComponent {
 
   render() {
     return (
-      <div>
-        <div className="repo-list" style={{ display: this.props.listOfRepos.length === 0 ? 'none' : 'block' }}>
-          <RepoTableHeaders/>
+      <React.Fragment>
+        <div className="repo-list">
+          <RepoTableHeaders />
           {this.props.listOfRepos.map(repo =>
-            <RepoLine repo={repo} key={repo.id} type={DATA_TYPE.repos}/>)}
+            <RepoLine repo={repo} key={repo.id} type={DATA_TYPE.repos} />)}
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
