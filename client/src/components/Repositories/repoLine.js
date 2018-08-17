@@ -5,7 +5,7 @@ import { addBookmark } from '../../store/actions/repositories';
 import './repositories.css';
 import '../../styles/button.css'
 import { DATA_TYPE } from '../../store/constants'
- 
+
 
 class RepoLine extends PureComponent {
     constructor(props) {
@@ -33,6 +33,23 @@ class RepoLine extends PureComponent {
         event.preventDefault();
     }
 
+    renderAddBookmarkButton(isRepoBookmarked) {
+        return (!isRepoBookmarked ?
+            <button onClick={this.handleAddBookmark} value={this.state.repo.id} className="general-button">Bookmark</button>
+            : <button className="general-button-disabled" disabled>Bookmarked</button>)
+    }
+
+    renderAddBookmark(isRepoBookmarked) {
+        return (!isRepoBookmarked ?
+            <button onClick={this.handleAddBookmark} value={this.state.repo.id} className="general-button">Bookmark</button>
+            : <button className="general-button-disabled" disabled>Bookmarked</button>)
+    }
+
+    renderDeleteBookmark()
+    {
+        return <button onClick={this.handleAddBookmark} value={this.state.repo.id} className="general-button">Delete</button>
+    }
+
     render() {
         let isRepoBookmarked = this.props.bookmarks.includes(this.state.repo.id.toString());
 
@@ -44,13 +61,10 @@ class RepoLine extends PureComponent {
             <div className="repo-line-fullname">
                 {this.state.repo.full_name}
             </div>
-            {this.state.type === DATA_TYPE.repos &&  <div className="repo-line-bookmark">
-                {!isRepoBookmarked && <button onClick={this.handleAddBookmark} value={this.state.repo.id} className="general-button">Bookmark</button>}
-                {isRepoBookmarked && <button className="general-button-disabled" disabled>Bookmarked</button>}
-            </div>}
-            { this.state.type === DATA_TYPE.bookmarks &&  <div className="repo-line-bookmark">
-                <button onClick={this.handleAddBookmark} value={this.state.repo.id} className="general-button">Delete</button>
-            </div> }
+            <div className="repo-line-bookmark">
+                {this.state.type === DATA_TYPE.repos && this.renderAddBookmark(isRepoBookmarked)}
+                {this.state.type === DATA_TYPE.bookmarks && this.renderDeleteBookmark()}
+            </div>
             <div className="repo-line-url">
                 <a href={this.state.repo.html_url} className="general-button">Go to Repo</a>
             </div>
