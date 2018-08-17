@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import '../Repositories/repositories.css';
 import RepoLine from '../Repositories/repoLine'
 import RepoTableHeaders from '../Repositories/repoTableHeaders'
+import { DATA_TYPE } from '../../store/constants'
 
 class Bookmarks extends PureComponent {
   static propTypes = {
@@ -20,7 +21,7 @@ class Bookmarks extends PureComponent {
         <div className="repo-list" style={{ display: this.props.listOfRepos.length === 0 ? 'none' : 'block' }}>
           <RepoTableHeaders/>
           {this.props.listOfRepos.map(repo =>
-            <RepoLine repo={repo} key={repo.id} />
+            <RepoLine repo={repo} key={repo.id} type={ DATA_TYPE.bookmarks }/>
           )}
         </div>
       </div>

@@ -4,12 +4,15 @@ import { connect } from 'react-redux';
 import { addBookmark } from '../../store/actions/repositories';
 import './repositories.css';
 import '../../styles/button.css'
+import { DATA_TYPE } from '../../store/constants'
+ 
 
 class RepoLine extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
             repo: props.repo,
+            type: props.type
         };
         this.handleAddBookmark = this.handleAddBookmark.bind(this);
     }
@@ -41,10 +44,13 @@ class RepoLine extends PureComponent {
             <div className="repo-line-fullname">
                 {this.state.repo.full_name}
             </div>
-            <div className="repo-line-bookmark">
+            {this.state.type === DATA_TYPE.repos &&  <div className="repo-line-bookmark">
                 {!isRepoBookmarked && <button onClick={this.handleAddBookmark} value={this.state.repo.id} className="general-button">Bookmark</button>}
                 {isRepoBookmarked && <button className="general-button-disabled" disabled>Bookmarked</button>}
-            </div>
+            </div>}
+            { this.state.type === DATA_TYPE.bookmarks &&  <div className="repo-line-bookmark">
+                <button onClick={this.handleAddBookmark} value={this.state.repo.id} className="general-button">Delete</button>
+            </div> }
             <div className="repo-line-url">
                 <a href={this.state.repo.html_url} className="general-button">Go to Repo</a>
             </div>

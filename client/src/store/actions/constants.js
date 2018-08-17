@@ -1,2 +1,0 @@
-export const GET_REPOSITORIES = "GET_REPOSITORIES";
-export const ADD_BOOKMARK = "ADD_BOOKMARK";

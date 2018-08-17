@@ -1,5 +1,4 @@
-import {GET_REPOSITORIES, ADD_BOOKMARK} from '../actions/constants'
-const CREATED_STATUS = 201;
+import { ACTION_NAME, SUCCESS_STATUSES } from '../constants'
 
 let initState = {
     listOfRepos : [],
@@ -9,15 +8,15 @@ let initState = {
 
 const repositoriesReducer = (state = initState, {type, payload}) => {
     switch (type) {     
-        case GET_REPOSITORIES:
+        case ACTION_NAME.getRepositories:
             console.log(`current state is:${state.repositories, state}`)
             state = {
                 ...state, 
                 listOfRepos : payload
             }
         return state;
-        case ADD_BOOKMARK:
-            if(payload.status !== CREATED_STATUS)
+        case ACTION_NAME.addBookmark:
+            if(payload.status !== SUCCESS_STATUSES.created)
             {
                 console.log("the bookmark wasn't found");
                 return state;

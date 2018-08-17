@@ -5,6 +5,7 @@ import './repositories.css';
 import '../../styles/button.css'
 import RepoLine from './repoLine'
 import RepoTableHeaders from './repoTableHeaders'
+import { DATA_TYPE } from '../../store/constants'
 
 class RepoTable extends PureComponent {
   static propTypes = {
@@ -21,7 +22,7 @@ class RepoTable extends PureComponent {
         <div className="repo-list" style={{ display: this.props.listOfRepos.length === 0 ? 'none' : 'block' }}>
           <RepoTableHeaders/>
           {this.props.listOfRepos.map(repo =>
-            <RepoLine repo={repo} key={repo.id}/>)}
+            <RepoLine repo={repo} key={repo.id} type={DATA_TYPE.repos}/>)}
         </div>
       </div>
     );

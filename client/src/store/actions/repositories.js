@@ -1,19 +1,19 @@
-import {GET_REPOSITORIES, ADD_BOOKMARK} from './constants';
+import { ACTION_NAME, URLS } from '../constants';
 import axios from 'axios';
 
 export const getRepositories = (searchItem) => dispatch => {
-  return fetch(`/api/search/${searchItem}`)
+  return fetch(URLS.apiSearch + searchItem)
     .then(res => res.json())
-    .then(repos => dispatch({type: GET_REPOSITORIES, payload: repos}))
+    .then(repos => dispatch({type: ACTION_NAME.getRepositories, payload: repos}))
 }
 
 export const addBookmark = (repoId) => dispatch => {
   return axios({
     method:'post',
-    url:`/api/bookmarks/${repoId}`,
+    url: URLS.bookmarks + repoId,
   })
     .then(function(response) {
-      dispatch({type: ADD_BOOKMARK, payload : 
+      dispatch({type: ACTION_NAME.addBookmark, payload : 
         { status: response.status, 
           bookmarkedRepoId :response.data.bookmarkedRepoId}})});
 }
