@@ -1,94 +1,89 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { addBookmark, deleteBookmark } from '../../store/actions/repositories';
 import './repositories.css';
-import '../../styles/button.css';
-import { DATA_TYPE } from '../../store/constants';
+import '../../styles/button.css'
+import { DATA_TYPE } from '../../store/constants'
 
 
 class RepoLine extends PureComponent {
-  static propTypes = {
-    addBookmark: PropTypes.func.isRequired,
-    deleteBookmark: PropTypes.func.isRequired,
-    repo: PropTypes.object,
-    bookmarks: PropTypes.array.isRequired,
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            repo: props.repo,
+            type: props.type
+        };
+    }
 
-  static defaultProps = {
-    repo: {},
-    bookmarks: [],
-  }
+    static propTypes = {
+        addBookmark: PropTypes.func.isRequired,
+        deleteBookmark: PropTypes.func.isRequired,
+        repo: PropTypes.object,
+        bookmarks: PropTypes.array.isRequired
+    }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      repo: props.repo,
-      type: props.type,
-    };
-  }
+    static defaultProps = {
+        repo: {},
+        bookmarks: []
+    }
 
+    handleAddBookmark = (event) => {
+        this.props.addBookmark(event.target.value);
+    }
 
-  handleAddBookmark = (event) => {
-    this.props.addBookmark(event.target.value);
-  }
+    handleDeleteBookmark = (event) => {
+        this.props.deleteBookmark(event.target.value);
+    }
 
-  handleDeleteBookmark = (event) => {
-    this.props.deleteBookmark(event.target.value);
-  }
+    renderAddBookmarkButton = (isRepoBookmarked) => {
+        return (!isRepoBookmarked ?
+            <button onClick={this.handleAddBookmark} value={this.state.repo.id} className="general-button">Bookmark</button>
+            : <button className="general-button-disabled" disabled>Bookmarked</button>)
+    }
 
-  renderAddBookmarkButton = isRepoBookmarked => (!isRepoBookmarked
-    ? (
-      <button onClick={this.handleAddBookmark}
-        value={this.state.repo.id}
-        className="general-button">Bookmark</button>
-    )
-    : <button className="general-button-disabled" disabled>Bookmarked</button>)
+    renderAddBookmark = () => {
+        let isRepoBookmarked = this.props.bookmarks.includes(this.state.repo.id.toString());
 
-  renderAddBookmark = () => {
-    const isRepoBookmarked = this.props.bookmarks.includes(this.state.repo.id.toString());
+        return (!isRepoBookmarked ?
+            <button onClick={this.handleAddBookmark} value={this.state.repo.id} className="general-button">Bookmark</button>
+            : <button disabled>Bookmarked</button>)
+    }
 
-    return (!isRepoBookmarked
-      ? (<button onClick={this.handleAddBookmark} value={this.state.repo.id}
-        className="general-button">Bookmark</button>)
-      : <button disabled>Bookmarked</button>);
-  }
+    renderDeleteBookmark = () =>
+    {
+        return <button onClick={this.handleDeleteBookmark} value={this.state.repo.id} className="general-button">Delete</button>
+    }
 
-  renderDeleteBookmark = () => (
-    <button onClick={this.handleDeleteBookmark}
-      value={this.state.repo.id} className="general-button"> Delete</button>
-  )
-
-  render() {
-    return (
-      <div className="repo-container" key={this.state.repo.id}>
-        <div className="repo-line-empty-left" />
-        <div className="repo-line-forks">
-          {this.state.repo.forks}
-        </div>
-        <div className="repo-line-fullname">
-          {this.state.repo.full_name}
-        </div>
-        <div className="repo-line-bookmark">
-          {this.state.type === DATA_TYPE.repos && this.renderAddBookmark()}
-          {this.state.type === DATA_TYPE.bookmarks && this.renderDeleteBookmark()}
-        </div>
-        <div className="repo-line-url">
-          <a href={this.state.repo.html_url} className="general-button">Go to Repo</a>
-        </div>
-        <div className="repo-line-empty-right" />
-      </div>
-    );
-  }
+    render() {
+        return (<div className="repo-container" key={this.state.repo.id}>
+            <div className="repo-line-empty-left"></div>
+            <div className="repo-line-forks">
+                {this.state.repo.forks}
+            </div>
+            <div className="repo-line-fullname">
+                {this.state.repo.full_name}
+            </div>
+            <div className="repo-line-bookmark">
+                {this.state.type === DATA_TYPE.repos && this.renderAddBookmark()}
+                {this.state.type === DATA_TYPE.bookmarks && this.renderDeleteBookmark()}
+            </div>
+            <div className="repo-line-url">
+                <a href={this.state.repo.html_url} className="general-button">Go to Repo</a>
+            </div>
+            <div className="repo-line-empty-right"></div>
+        </div>);
+    }
 }
 
-const dispatchToProps = dispatch => ({
-  addBookmark: repoId => dispatch(addBookmark(repoId)),
-  deleteBookmark: repoId => dispatch(deleteBookmark(repoId)),
-});
+const dispatchToProps = (dispatch) => ({
+    addBookmark: (repoId) => dispatch(addBookmark(repoId)),
+    deleteBookmark: (repoId) => dispatch(deleteBookmark(repoId))
+})
 
-const mapStateToProps = state => ({
-  bookmarks: state.repositories.bookmarks,
-});
+const mapStateToProps = (state) => ({
+    bookmarks: state.repositories.bookmarks
+})
 
-export default connect(mapStateToProps, dispatchToProps)(RepoLine);
+export default connect(mapStateToProps, dispatchToProps)(RepoLine)
+
